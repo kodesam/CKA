@@ -1,0 +1,3 @@
+-it nfs-server bash -c "echo 'Hello World' > /exports/data-0001/index.html"
+ip=$(kubectl get pod www -o yaml |grep podIP | awk '{split($0,a,":"); print a[2]}'); echo $ip
+curl $ip
