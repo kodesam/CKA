@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: confid-demo
+spec:
+  containers:
+   - name: nginx
+     image: nginx
+    #  env:
+    #  - name: ilike
+    #    valueFrom:
+    #      configMapKeyRef:
+    #       name : color
+    #       key: favorite
+     envFrom:
+     - configMapRef:
+        name: colors 

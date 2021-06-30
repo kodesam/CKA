@@ -1,0 +1,133 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  annotations:
+    deprecated.daemonset.template.generation: "3"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"DaemonSet","metadata":{"annotations":{},"name":"ds-one","namespace":"default"},"spec":{"selector":{"matchLabels":{"system":"daemon-one"}},"template":{"metadata":{"labels":{"system":"daemon-one"}},"spec":{"containers":[{"image":"nginx:1.15.1","name":"nginx","ports":[{"containerPort":80}]}]}}}}
+  creationTimestamp: "2021-01-24T22:45:16Z"
+  generation: 4
+  managedFields:
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:deprecated.daemonset.template.generation: {}
+          f:kubectl.kubernetes.io/last-applied-configuration: {}
+      f:spec:
+        f:revisionHistoryLimit: {}
+        f:selector:
+          f:matchLabels:
+            .: {}
+            f:system: {}
+        f:template:
+          f:metadata:
+            f:labels:
+              .: {}
+              f:system: {}
+          f:spec:
+            f:containers:
+              k:{"name":"nginx"}:
+                .: {}
+                f:imagePullPolicy: {}
+                f:name: {}
+                f:ports:
+                  .: {}
+                  k:{"containerPort":80,"protocol":"TCP"}:
+                    .: {}
+                    f:containerPort: {}
+                    f:protocol: {}
+                f:resources: {}
+                f:terminationMessagePath: {}
+                f:terminationMessagePolicy: {}
+            f:dnsPolicy: {}
+            f:restartPolicy: {}
+            f:schedulerName: {}
+            f:securityContext: {}
+            f:terminationGracePeriodSeconds: {}
+        f:updateStrategy:
+          f:rollingUpdate:
+            .: {}
+            f:maxUnavailable: {}
+    manager: kubectl-client-side-apply
+    operation: Update
+    time: "2021-01-24T22:45:16Z"
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        f:updateStrategy:
+          f:type: {}
+    manager: kubectl-edit
+    operation: Update
+    time: "2021-01-24T22:54:40Z"
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        f:template:
+          f:spec:
+            f:containers:
+              k:{"name":"nginx"}:
+                f:image: {}
+    manager: kubectl
+    operation: Update
+    time: "2021-01-24T23:00:45Z"
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:currentNumberScheduled: {}
+        f:desiredNumberScheduled: {}
+        f:numberAvailable: {}
+        f:numberReady: {}
+        f:observedGeneration: {}
+        f:updatedNumberScheduled: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: "2021-01-24T23:02:14Z"
+  name: ds-one
+  namespace: default
+  resourceVersion: "53291"
+  selfLink: /apis/apps/v1/namespaces/default/daemonsets/ds-one
+  uid: dd622e4b-a124-4fc4-976f-ce4578636be2
+spec:
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      system: daemon-two
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        system: daemon-two
+    spec:
+      containers:
+      - image: nginx:1.15.1
+        imagePullPolicy: IfNotPresent
+        name: nginx
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  updateStrategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate
+status:
+  currentNumberScheduled: 2
+  desiredNumberScheduled: 2
+  numberAvailable: 2
+  numberMisscheduled: 0
+  numberReady: 2
+  observedGeneration: 4
+  updatedNumberScheduled: 2

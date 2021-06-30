@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sleepy5
+spec:
+  template:
+    spec:
+      containers:
+      - name: resting10
+        image: busybox11
+        command: ["/bin/sleep"]
+        args: ["3"]
+      restartPolicy: Never
