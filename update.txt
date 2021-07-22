@@ -1,2 +1,0 @@
--it nfs-server bash -c "echo 'Hello NFS World' > /exports/data-0001/index.html"
-curl $ip
