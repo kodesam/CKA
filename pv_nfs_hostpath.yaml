@@ -18,6 +18,7 @@ spec:
     server: k8smaster
     readOnly: false
 
+---
 
 apiVersion: v1
 kind: PersistentVolume
