@@ -1,3 +1,0 @@
-+ '[' '!' -f /opt/katacoda-finished ']'
-+ echo Starting
-+ /opt/launch-kubeadm.sh
