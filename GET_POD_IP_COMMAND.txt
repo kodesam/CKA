@@ -1,3 +1,4 @@
 # get pod IP #
-ip=$(kubectl get pod www -o yaml |grep podIP | awk '{split($0,a,":"); print a[2]}'); echo $ip
+ip=$(kubectl get pod POD-NAME -o yaml |grep podIP | awk '{split($0,a,":"); print a[2]}'); 
+echo $ip
 curl $ip
