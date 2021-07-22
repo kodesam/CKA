@@ -9,8 +9,7 @@ spec:
 # volumeMode: Filesystem
   accessModes:
     - ReadWriteMany
-
-
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
