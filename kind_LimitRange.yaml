@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: mem-limit-range
+  namespace: limit
+spec:
+  limits:
+  - default:
+      memory: 512Mi
+    defaultRequest:
+      memory: 256Mi
+    type: Container
+    
+ --
+ $ kubectl -n limit describe limitranges 
+Name:       mem-limit-range
+Namespace:  limit
+Type        Resource  Min  Max  Default Request  Default Limit  Max Limit/Request Ratio
+----        --------  ---  ---  ---------------  -------------  -----------------------
+Container   memory    -    -    256Mi            512Mi 
+
+kubectl get pod -n limit -o yaml
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+    /
+    /
+    /
+    spec:
+    containers:
+    - image: nginx
+      imagePullPolicy: Always
+      name: mem
+      resources:
+        limits:
+          memory: 512Mi
+        requests:
+          memory: 256Mi
+/
+/
+phase: Running
+    podIP: 10.245.89.53
+    podIPs:
+    - ip: 10.245.89.53
+    qosClass: Burstable
+    startTime: "2021-08-09T16:59:23Z"
