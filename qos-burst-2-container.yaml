@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: qos-burst
+  namespace: qos-example
+spec:
+  containers:
+
+  - name: qos-burst
+    image: nginx
+    resources:
+      requests:
+        memory: "200Mi"
+
+  - name: qos-besteffort
+    image: redis
+
+----
+kubectl get pod qos-burst --namespace=qos-example --output=yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+\
+\
+\
+   name: qos-burst
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2021-08-09T16:11:24Z"
+  hostIP: 192.168.1.105
+  phase: Running
+  podIP: 10.245.89.63
+  podIPs:
+  - ip: 10.245.89.63
+  qosClass: Burstable    < --------- Burstable is choosen ------> 
+  startTime: "2021-08-09T16:11:17Z"
