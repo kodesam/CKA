@@ -1,0 +1,18 @@
+$kubeadm certs check-expiration
+
+CERTIFICATE                EXPIRES                  RESIDUAL TIME   CERTIFICATE AUTHORITY   EXTERNALLY MANAGED
+admin.conf                 Aug 04, 2022 20:00 UTC   360d                                    no      
+apiserver                  Aug 04, 2022 20:00 UTC   360d            ca                      no      
+apiserver-etcd-client      Aug 04, 2022 20:00 UTC   360d            etcd-ca                 no      
+apiserver-kubelet-client   Aug 04, 2022 20:00 UTC   360d            ca                      no      
+controller-manager.conf    Aug 04, 2022 20:00 UTC   360d                                    no      
+etcd-healthcheck-client    Aug 04, 2022 20:00 UTC   360d            etcd-ca                 no      
+etcd-peer                  Aug 04, 2022 20:00 UTC   360d            etcd-ca                 no      
+etcd-server                Aug 04, 2022 20:00 UTC   360d            etcd-ca                 no      
+front-proxy-client         Aug 04, 2022 20:00 UTC   360d            front-proxy-ca          no      
+scheduler.conf             Aug 04, 2022 20:00 UTC   360d                                    no      
+
+CERTIFICATE AUTHORITY   EXPIRES                  RESIDUAL TIME   EXTERNALLY MANAGED
+ca                      Aug 02, 2031 20:00 UTC   9y              no      
+etcd-ca                 Aug 02, 2031 20:00 UTC   9y              no      
+front-proxy-ca          Aug 02, 2031 20:00 UTC   9y              no      
