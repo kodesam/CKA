@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: qos-besteffort
+  namespace: qos-example
+spec:
+  containers:
+  - name: qos-best
+    image: nginx
+
+
+----
+
+$ kubectl get pod qos-besteffort --namespace=qos-example --output=yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+\ 
+\
+\
+ name: qos-best
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2021-08-09T16:03:08Z"
+  hostIP: 192.168.1.105
+  phase: Running
+  podIP: 10.245.89.60
+  podIPs:
+  - ip: 10.245.89.60
+  qosClass: BestEffort    <---------BestEffort ------------>
+  startTime: "2021-08-09T16:03:02Z"
