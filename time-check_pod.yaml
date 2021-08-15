@@ -25,7 +25,7 @@ spec:
     name: time-check
     command: ["/bin/sh","-c","while true; do date; sleep $TIME_FREQ; done"]
     volumeMounts:
-    - mountPath: /opt/data/time/time-check.log
+    - mountPath: /opt/data/time/
       name: log-volume
     env:
     - name: TIME_FREQ
