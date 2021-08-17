@@ -23,7 +23,7 @@ spec:
   containers:
   - image: busybox:latest
     name: time-check
-    command: ["/bin/sh","-c","while true; do date; sleep $TIME_FREQ; done"]
+    command: ["/bin/sh","-c","while true; do date; sleep $TIME_FREQ; done > /opt/data/time/time-check.log"]
     volumeMounts:
     - mountPath: /opt/data/time/
       name: log-volume
