@@ -1,0 +1,31 @@
+### countdown Jobs ###
+
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: countdown-datacenter
+spec:
+  template:
+    spec:
+      containers:
+      - name: container-countdown-datacenter
+        image: ubuntu:latest
+        command: ["bin/bash","-c","for i in 10 9 8 7 6 5 4 3 2 1 ; do echo $i ; done"]
+      restartPolicy: Never
+      
+---
+kubectl get pods
+NAME                         READY   STATUS      RESTARTS   AGE
+countdown-datacenter-l7zhv   0/1     Completed   0          77s
+thor@jump_host /tmp$ kubectl logs countdown-datacenter-l7zhv
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
