@@ -1,0 +1,55 @@
+Create a redis deployment with following parameters:
+Create a config map called my-redis-config having maxmemory 2mb in redis-config.
+Name of the deployment should be redis-deployment, it should use redis:alpine image and container name should be redis-container. Also make sure it has only 1 replica.
+The container should request for 1 CPU.
+Mount 2 volumes:
+a. An Empty directory volume called data at path /redis-master-data.
+b. A configmap volume called redis-config at path /redis-master.
+c. The container should expose the port 6379.
+
+/tmp$ kubectl create cm my-redis-config --from-literal=maxmemory=2mb
+configmap/my-redis-config created
+thor@jump_host /tmp$ kubectl get cm
+NAME               DATA   AGE
+kube-root-ca.crt   1      39m
+my-redis-config    1      5s
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: redis-deployment
+  name: redis-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-deployment
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: redis-deployment
+    spec:
+      containers:
+      - image: redis:alpine
+        name: redis-container
+        volumeMounts:
+        - name: data
+          mountPath: /redis-master-data
+        volumeMounts:
+        - name: redis-config
+          mountPath: /redis-master
+        ports:
+        - containerPort: 6379
+        resources:
+          requests:
+            cpu : 1
+      volumes:
+      - name: redis-config
+        configMap:
+            name: my-redis-config
+      - name: data
