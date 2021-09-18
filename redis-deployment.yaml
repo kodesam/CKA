@@ -53,3 +53,4 @@ spec:
         configMap:
             name: my-redis-config
       - name: data
+        emptyDir: {}
