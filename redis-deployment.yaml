@@ -40,7 +40,6 @@ spec:
         volumeMounts:
         - name: data
           mountPath: /redis-master-data
-        volumeMounts:
         - name: redis-config
           mountPath: /redis-master
         ports:
