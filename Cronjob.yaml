@@ -1,0 +1,25 @@
+### Create a cronjob named xfusion. #####
+Set schedule to */12 * * * *.
+Container name should be cron-xfusion.
+Use nginx image with latest tag only and remember to mention the tag i.e nginx:latest.
+Run a dummy command echo Welcome to xfusioncorp!.
+
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: xfusion
+spec:
+  schedule: "*/12 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: cron-xfusion
+            image: nginx:latest
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/sh
+            - -c
+            - echo Welcome to xfusioncorp!
+          restartPolicy: OnFailure
