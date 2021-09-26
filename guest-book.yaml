@@ -1,0 +1,109 @@
+### BACK-END TIER ###
+Create a deployment named redis-master for Redis master.
+a.) Replicas count should be 1.
+b.) Container name should be master-redis-devops and it should use image redis.
+c.) Request resources as CPU should be 100m and Memory should be 100Mi.
+d.) Container port should be redis default port i.e 6379.
+Create a service named redis-master for Redis master. Port and targetPort should be Redis default port i.e 6379.
+Create another deployment named redis-slave for Redis slave.
+a.) Replicas count should be 2.
+b.) Container name should be slave-redis-devops and it should use gcr.io/google_samples/gb-redisslave:v3 image.
+c.) Requests resources as CPU should be 100m and Memory should be 100Mi.
+d.) Define an environment variable named GET_HOSTS_FROM and its value should be dns.
+e.) Container port should be Redis default port i.e 6379.
+Create another service named redis-slave. It should use Redis default port i.e 6379.
+### FRONT END TIER ###
+Create a deployment named frontend.
+a.) Replicas count should be 3.
+b.) Container name should be php-redis-devops and it should use gcr.io/google-samples/gb-frontend:v4 image.
+c.) Request resources as CPU should be 100m and Memory should be 100Mi.
+d.) Define an environment variable named as GET_HOSTS_FROM and its value should be dns.
+e.) Container port should be 80.
+Create a service named frontend. Its type should be NodePort, port should be 80 and its nodePort should be 30009.
+
+___
+
+thor@jump_host /tmp$ cat redis-m.yaml 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: redis-master
+  name: redis-master
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-master
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: redis-master
+    spec:
+      containers:
+      - image: redis
+        name: master-redis-devops
+        resources:
+          requests:
+             cpu: 100m
+             memory: 100Mi
+        ports:
+        - containerPort: 6379
+thor@jump_host /tmp$ cat redis-s.yaml 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: redis-slave
+  name: redis-slave
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: redis-slave
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: redis-slave
+    spec:
+      containers:
+      - image: gcr.io/google_samples/gb-redisslave:v3
+        name: slave-redis-devops
+        resources:
+          requests:
+             cpu: 100m
+             memory: 100Mi
+        ports:
+        - containerPort: 6379
+        env:
+        - name: GET_HOSTS_FROM
+          value: dns
+thor@jump_host /tmp$ cat frs.yaml 
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: frontend
+  name: frontend
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 30009
+  selector:
+    app: frontend
+  type: NodePort
+status:
+  loadBalancer: {}
+thor@jump_host /tmp$ 
+
+kubectl expose deployment redis-master --name redis-master --port 6379 --targetPort 6379
+kubectl expose deployment redis-slave --name redis-slave --port 6379
